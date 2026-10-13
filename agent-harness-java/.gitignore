@@ -2,3 +2,6 @@ target/
 *.class
 .idea/
 *.iml
+
+# v4's runtime memory store - generated, not source
+memory.md

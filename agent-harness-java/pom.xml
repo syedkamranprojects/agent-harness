@@ -72,7 +72,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.6.4</version>
                 <configuration>
-                    <mainClass>com.agentharness.v3.V3</mainClass>
+                    <mainClass>com.agentharness.v4.V4</mainClass>
                 </configuration>
             </plugin>
         </plugins>
