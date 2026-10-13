@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.agentharness</groupId>
+    <artifactId>agent-harness-java</artifactId>
+    <version>0.1.0</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.release>25</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <langchain4j.version>1.22.0</langchain4j.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>dev.langchain4j</groupId>
+                <artifactId>langchain4j-bom</artifactId>
+                <version>${langchain4j.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- core LangChain4j API: ChatModel, ChatMessage, etc. -->
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j</artifactId>
+        </dependency>
+
+        <!-- OpenAI-compatible client - used to talk to Groq's OpenAI-compatible endpoint -->
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-open-ai</artifactId>
+        </dependency>
+
+        <!-- MCP client (stdio transport): launches MCP servers as subprocesses and lets
+             us list/call their tools. This module has never reached a GA version number
+             (it tracks langchain4j's version but stays "-betaNN" suffixed), so it isn't
+             covered by langchain4j-bom above and needs its version pinned explicitly. -->
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-mcp</artifactId>
+            <version>1.22.0-beta32</version>
+        </dependency>
+
+        <!-- parses tool-call arguments (JSON string -> Map), e.g. {"filename":"notes.txt"};
+             already pulled in transitively by langchain4j-core, declared explicitly since v1
+             uses it directly. Version matches what langchain4j-core:1.22.0 brings in. -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.22.1</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.15.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.6.4</version>
+                <configuration>
+                    <mainClass>com.agentharness.v3.V3</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,5 @@
+# Python reference project has its own separate git repo - not tracked here
+agent-harness-build/
+
+# original download artifact, superseded by the extracted agent-harness-build/
+agent-harness-build.zip
