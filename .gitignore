@@ -5,4 +5,4 @@ agent-harness-build/
 agent-harness-build.zip
 
 # personal from-scratch Python practice (manual rewrite, own venv) - not part of this repo
-agent-harness/
+agent-harness-python/
